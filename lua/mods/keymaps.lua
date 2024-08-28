@@ -17,17 +17,20 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- Harpoon keymaps
+vim.keymap.set('n', '<leader>h', '<CMD>lua require("harpoon.mark").add_file()<CR><CMD>echo "mark added"<CR>', { desc = 'Add file to harpoon' })
+vim.keymap.set('n', '<leader>ha', '<CMD>lua require("harpoon.ui").toggle_quick_menu()<CR>', { desc = 'Toggle harpoon menu' })
+vim.keymap.set('n', '1', '<CMD>lua require("harpoon.ui").nav_file(1)<CR>')
+vim.keymap.set('n', '2', '<CMD>lua require("harpoon.ui").nav_file(2)<CR>')
+vim.keymap.set('n', '3', '<CMD>lua require("harpoon.ui").nav_file(3)<CR>')
+vim.keymap.set('n', '4', '<CMD>lua require("harpoon.ui").nav_file(4)<CR>')
+vim.keymap.set('n', '5', '<CMD>lua require("harpoon.ui").nav_file(5)<CR>')
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
 --  See `:help wincmd` for a list of all window commands
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- copilot accept <C-l>
+vim.keymap.set('i', '<C-l>', 'copilot#Accept("<CR>")', { expr = true, noremap = true, silent = true })

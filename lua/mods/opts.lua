@@ -6,6 +6,7 @@
 vim.opt.signcolumn = 'yes' -- sets vim.opt.signcolumn to auto
 vim.opt.wrap = false -- sets vim.opt.wrap
 vim.opt.foldmethod = 'indent'
+vim.opt.foldlevelstart = 99
 -- Make line numbers default
 vim.opt.relativenumber = true
 
