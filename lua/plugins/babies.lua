@@ -1,5 +1,6 @@
 return {
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'ThePrimeagen/harpoon',
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -52,6 +53,7 @@ return {
           comment_visual = '<leader>/',
         },
       }
+      require('mini.tabline').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,

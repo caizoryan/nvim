@@ -12,6 +12,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = '*.ts',
+  callback = function()
+    local bufname = vim.fn.expand '%'
+    if bufname == 'index.ts' and vim.g.run_ts then
+      print 'Compiling index.ts...'
+      os.execute 'tsc --module ES2015 --target ES2015 index.ts'
+    end
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'

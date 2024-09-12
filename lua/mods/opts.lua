@@ -3,6 +3,7 @@
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+vim.opt.tabstop = 2 -- sets vim.opt.tabstop to 2
 vim.opt.signcolumn = 'yes' -- sets vim.opt.signcolumn to auto
 vim.opt.wrap = false -- sets vim.opt.wrap
 vim.opt.foldmethod = 'indent'

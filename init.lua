@@ -2,6 +2,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = false
+vim.g.run_ts = false
 
 require 'mods.opts'
 require 'mods.keymaps'
@@ -13,8 +14,6 @@ require('lazy').setup({
   require 'plugins.telescope',
   require 'plugins.lsp',
   require 'plugins.treesitter',
-
-  'ThePrimeagen/harpoon',
 
   { -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     'folke/tokyonight.nvim',
