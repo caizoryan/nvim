@@ -170,6 +170,17 @@ return {
         -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
         --
+        html = {
+          format = {
+            templating = true,
+            wrapLineLength = 120,
+            wrapAttributes = 'auto',
+          },
+          hover = {
+            documentation = true,
+            references = true,
+          },
+        },
 
         lua_ls = {
           -- cmd = {...},
