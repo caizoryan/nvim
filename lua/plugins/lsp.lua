@@ -72,6 +72,14 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
+          local orig_set_signs = vim.lsp.diagnostic.set_signs
+          local set_signs_limited = function(diagnostics, bufnr, client_id, sign_ns, opts)
+            opts = opts or {}
+            opts.severity_limit = 'Error'
+            orig_set_signs(diagnostics, bufnr, client_id, sign_ns, opts)
+          end
+          vim.lsp.diagnostic.set_signs = set_signs_limited
+
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
@@ -99,6 +107,8 @@ return {
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           map('<leader>lc', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+
+          map('<leader>ld', vim.diagnostic.open_float, '[D]iagnostic')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -168,7 +178,6 @@ return {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {},
         --
         html = {
           format = {

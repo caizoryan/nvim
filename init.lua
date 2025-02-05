@@ -4,6 +4,10 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = false
 vim.g.run_ts = false
 
+vim.g.markdown_fenced_languages = {
+  'ts=typescript',
+}
+
 require 'mods.opts'
 require 'mods.keymaps'
 require 'mods.autocommands'
