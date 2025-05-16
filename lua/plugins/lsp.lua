@@ -87,6 +87,7 @@ return {
 
           -- Find references for the word under your cursor.
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          map('L', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
@@ -168,6 +169,16 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
+        ts_ls = {
+          root_dir = require('lspconfig').util.root_pattern { 'package.json', 'tsconfig.json' },
+          single_file_support = false,
+          settings = {},
+        },
+        denols = {
+          root_dir = require('lspconfig').util.root_pattern { 'deno.json', 'deno.jsonc' },
+          single_file_support = false,
+          settings = {},
+        },
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
@@ -197,11 +208,20 @@ return {
           -- capabilities = {},
           settings = {
             Lua = {
+              workspace = {
+                library = { '/Users/aaryan/.local/share/LuaAddons/love2d' },
+                --userThirdParty = { '/Users/aaryan/.local/share/LuaAddons' },
+                --checkThirdParty = 'Apply',
+              },
+
               completion = {
                 callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = {
+                --globals = { 'vim', 'love' },
+                --disable = { 'lowercase-global' },
+              },
             },
           },
         },

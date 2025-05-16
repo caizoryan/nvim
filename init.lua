@@ -3,6 +3,11 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = false
 vim.g.run_ts = false
+vim.o.termguicolors = true
+vim.o.linespace = 5
+
+vim.o.relativenumber = false
+vim.o.number = false
 
 vim.g.markdown_fenced_languages = {
   'ts=typescript',
@@ -18,15 +23,6 @@ require('lazy').setup({
   require 'plugins.telescope',
   require 'plugins.lsp',
   require 'plugins.treesitter',
-
-  { -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      vim.cmd.colorscheme 'tokyonight-moon'
-      vim.cmd.hi 'Comment gui=none'
-    end,
-  },
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
