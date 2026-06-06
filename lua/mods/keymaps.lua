@@ -1,47 +1,36 @@
 -- [[ Basic Keymaps ]]
+local key = vim.keymap.set
+
+key('n', 'j', 'gj')
+key('n', 'k', 'gk')
 
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open Parent Directory' })
+key('n', '<Esc>', '<cmd>nohlsearch<CR>')
+key('n', '-', '<CMD>Oil<CR>', { desc = 'Open Parent Directory' })
 
-vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open Parent Directory' })
+key('n', '-', '<CMD>Oil<CR>', { desc = 'Open Parent Directory' })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>c', '<CMD>bdelete<CR>', { desc = 'Close Current buffer' })
-vim.keymap.set('n', '<leader>q', '<CMD>close<CR>', { desc = 'Close Current window' })
+key('n', '<leader>c', '<CMD>bdelete<CR>', { desc = 'Close Current buffer' })
+key('n', '<leader>q', '<CMD>close<CR>', { desc = 'Close Current window' })
 
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+key('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- Harpoon keymaps
-vim.keymap.set('n', '<leader>h', '<CMD>lua require("harpoon.mark").add_file()<CR><CMD>echo "mark added"<CR>', { desc = 'Add file to harpoon' })
-vim.keymap.set('n', '<leader>ha', '<CMD>lua require("harpoon.ui").toggle_quick_menu()<CR>', { desc = 'Toggle harpoon menu' })
-
-vim.keymap.set('n', '1', '<CMD>lua require("harpoon.ui").nav_file(1)<CR>')
-vim.keymap.set('n', '2', '<CMD>lua require("harpoon.ui").nav_file(2)<CR>')
-vim.keymap.set('n', '3', '<CMD>lua require("harpoon.ui").nav_file(3)<CR>')
-vim.keymap.set('n', '4', '<CMD>lua require("harpoon.ui").nav_file(4)<CR>')
-vim.keymap.set('n', '5', '<CMD>lua require("harpoon.ui").nav_file(5)<CR>')
-
-vim.keymap.set('n', '<leader>uc', '<CMD>colorscheme quiet<CR>')
-vim.keymap.set('n', '<leader>ul', '<CMD>colorscheme slate<CR>')
+key('n', '<leader>uc', '<CMD>colorscheme quiet<CR>')
+key('n', '<leader>ul', '<CMD>colorscheme slate<CR>')
+key('n', '<leader>ur', '<CMD>colorscheme randombones<CR>')
 
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+key('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+key('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+key('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+key('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-vim.keymap.set('n', '<D-x>', ':')
-
--- copilot accept <C-l>
--- disable copilot tab
-vim.g.copilot_no_tab_map = true
-vim.keymap.set('i', '<C-l>', "copilot#Accept('<CR>')", { noremap = true, silent = true, expr = true, replace_keycodes = false })
+key('n', '<D-x>', ':')
 
 local preview = false
-
 local preview_mode = function()
   preview = true
   print('preview:', preview)
@@ -76,5 +65,28 @@ local toggle_preview_mode = function()
   end
 end
 
-vim.keymap.set('n', '<leader>pp', toggle_preview_mode, { desc = 'preview mode' })
+key('n', '<leader>pp', toggle_preview_mode, { desc = 'preview mode' })
 
+-- ___________________
+-- -------------------
+-- Telescope commands
+-- -------------------
+-- ___________________
+
+local builtin = require 'telescope.builtin'
+
+key('n', '<leader>fh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+key('n', '<leader>fk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+key('n', '<leader>ff', builtin.find_files, { desc = '[S]earch [F]iles' })
+key('n', '<C-f>', builtin.find_files, { desc = '[S]earch [F]iles' })
+key('n', '<C-s>', builtin.current_buffer_fuzzy_find, { desc = '[S]earch [F]iles' })
+key('n', '<C-b>', builtin.buffers, { desc = '[S]earch [F]iles' })
+
+key('n', '<leader>fc', builtin.colorscheme, { desc = '[S]earch [C]olorscheme' })
+key('n', '<leader>fs', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+key('n', '<leader>fd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+key('n', '<leader>fr', builtin.resume, { desc = '[S]earch [R]esume' })
+key('n', '<leader>fB', builtin.buffers, { desc = '[ ] Find existing buffers' })
+key('n', '<leader>fb', builtin.current_buffer_fuzzy_find, { desc = '[S]earch [B]uffer' })
+key('n', '<leader>fg', builtin.git_files, { desc = '[S]earch [G]it files' })
+key('n', '<leader>fu', '<cmd>Telescope undo<cr>')

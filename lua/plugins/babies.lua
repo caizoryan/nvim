@@ -1,6 +1,19 @@
 return {
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  'ThePrimeagen/harpoon',
+  {
+    'folke/zen-mode.nvim',
+    opts = {
+      window = {
+        width = 80,
+
+        options = {
+          signcolumn = 'no', -- disable signcolumn
+          number = false, -- disable number column
+          relativenumber = false, -- disable relative numbers
+          wrap = true,
+        },
+      },
+    },
+  },
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -13,6 +26,27 @@ return {
         changedelete = { text = '~' },
       },
     },
+  },
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'debugloop/telescope-undo.nvim',
+    },
+    config = function()
+      print 'Trying to load?'
+      require('telescope').setup {
+        -- the rest of your telescope config goes here
+        extensions = {
+          undo = {
+            -- telescope-undo.nvim config, see below
+          },
+          -- other extensions:
+          -- file_browser = { ... }
+        },
+      }
+      require('telescope').load_extension 'undo'
+    end,
   },
   {
     'stevearc/oil.nvim',
@@ -128,17 +162,22 @@ return {
       },
     },
   },
+  -- LUSH is super cool
   {
-    'projekt0n/github-nvim-theme',
-    name = 'github-theme',
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      require('github-theme').setup {
-        -- ...
-      }
+    'rktjmp/lush.nvim',
+    -- if you wish to use your own colorscheme:
+    -- { dir = '/absolute/path/to/colorscheme', lazy = true },
+  },
 
-      vim.cmd 'colorscheme github_dark'
+  {
+    'zenbones-theme/zenbones.nvim',
+    dependencies = 'rktjmp/lush.nvim',
+    lazy = false,
+    priority = 1000,
+    -- you can set set configuration options here
+    config = function()
+      vim.g.zenbones_darken_comments = 45
+      vim.cmd.colorscheme 'minicyan'
     end,
   },
   -- { 'github/copilot.vim', lazy = false },
